@@ -10,26 +10,36 @@ namespace LeetCodePractice
 
         public int FindLengthOfShortestSubarray(int[] arr)
         {
-            int currentValue = 0;
-            bool isNonDecreasing = false;
-            arr.ToList().ForEach(x =>
+            var sortedList = arr.OrderBy(x => x);
+            if (sortedList.SequenceEqual(arr))
             {
-                isNonDecreasing = x > currentValue;
-                if (isNonDecreasing)
-                {
-                    Console.WriteLine($"fail value {x}");
-                    return;
-                }
-                    
+                Console.WriteLine($"Already in non decreasing format");
+                return 0;
+            }
+            else
+            {
+                Console.WriteLine($"Check for  shortest sub array");
+                var lastItemInSorted = sortedList.Last();
+                int startIndex = 0;
+                
+                var listSorted = arr.TakeWhile(x => {
+                    int currentValueIndex = arr.ToList().IndexOf(x);
+                    int nextPos = currentValueIndex + 1 <= arr.Length - 1 ? currentValueIndex + 1 : arr.Length - 1;
+                    return arr[currentValueIndex] < arr[nextPos];
+                });
+                listSorted.ToList().ForEach(f => Console.Write($" {f}"));
+                return 1;
+            }
 
-                currentValue = x;
-            });
 
-            Console.WriteLine($"Has Non decreasing values { isNonDecreasing.ToString() } current check {currentValue}");
+          
+
+
+            // Console.WriteLine($"Has Non decreasing values { isNonDecreasing.ToString() } current check {currentValue}");
             
 
 
-            return 0;
+            
         }
     }
 }
