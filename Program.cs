@@ -22,7 +22,7 @@ namespace LeetCodePractice
             result = manager.FindLengthOfShortestSubarray(testArray);
 
 
-            Console.WriteLine($"The Length of the shortest subarray is {result}");
+           Console.WriteLine($"The Length of the shortest subarray is {result}");
 
         }
     }
